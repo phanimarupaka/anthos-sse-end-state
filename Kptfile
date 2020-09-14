@@ -2,4 +2,3 @@ apiVersion: kpt.dev/v1alpha1
 kind: Kptfile
 metadata:
   name: Anthos environ sample package
-

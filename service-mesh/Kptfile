@@ -2,3 +2,19 @@ apiVersion: kpt.dev/v1alpha1
 kind: Kptfile
 metadata:
   name: Anthos sample package for Anthos Service Mesh
+openAPI:
+  definitions:
+    io.k8s.cli.setters.namespace:
+      x-k8s-cli:
+        setter:
+          name: namespace
+          value: YOURSPACE
+          required: true
+    io.k8s.cli.setters.membership:
+      type: array
+      x-k8s-cli:
+        setter:
+          name: membership
+          value: ""
+          listValues:
+          - gke-cluster-1

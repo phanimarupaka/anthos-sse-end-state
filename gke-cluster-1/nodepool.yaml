@@ -14,12 +14,12 @@
 apiVersion: container.cnrm.cloud.google.com/v1beta1 # See https://cloud.google.com/config-connector/docs/reference/resource-docs/container/containernodepool for all the available options.
 kind: ContainerNodePool
 metadata:
-  name: "gke-nodepool-1"
-  namespace: YOURSPACE
+  name: "gke-nodepool-1" # {"$kpt-set":"gcloud.container.nodepool.name"}
+  namespace: YOURSPACE # {"$kpt-set":"namespace"}
   annotations:
-    cnrm.cloud.google.com/project-id: "PROJECT_ID"
+    cnrm.cloud.google.com/project-id: "PROJECT_ID" # {"$kpt-set":"gcloud.core.project"}
 spec:
-  location: us-central1-c
+  location: us-central1-c # {"$kpt-set":"gcloud.container.cluster.location"}
   initialNodeCount: 2
   autoscaling:
     minNodeCount: 2
@@ -29,4 +29,4 @@ spec:
     workloadMetadataConfig:
       nodeMetadata: GKE_METADATA_SERVER
   clusterRef:
-    name: "gke-cluster-1"
+    name: "gke-cluster-1" # {"$kpt-set":"gcloud.container.cluster.name"}

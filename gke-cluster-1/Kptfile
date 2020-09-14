@@ -2,3 +2,46 @@ apiVersion: kpt.dev/v1alpha1
 kind: Kptfile
 metadata:
   name: Anthos sample package for GKE Cluster
+openAPI:
+  definitions:
+    io.k8s.cli.setters.namespace:
+      x-k8s-cli:
+        setter:
+          name: namespace
+          value: YOURSPACE
+          required: true
+    io.k8s.cli.setters.gcloud.container.cluster.location:
+      x-k8s-cli:
+        setter:
+          name: gcloud.container.cluster.location
+          value: us-central1-c
+    io.k8s.cli.setters.gcloud.container.cluster.name:
+      x-k8s-cli:
+        setter:
+          name: gcloud.container.cluster.name
+          value: gke-cluster-1
+    io.k8s.cli.setters.gcloud.container.nodepool.name:
+      x-k8s-cli:
+        setter:
+          name: gcloud.container.nodepool.name
+          value: gke-nodepool-1
+    io.k8s.cli.setters.gcloud.core.project:
+      x-k8s-cli:
+        setter:
+          name: gcloud.core.project
+          value: PROJECT_ID
+          required: true
+    io.k8s.cli.setters.gcloud.project.projectNumber:
+      x-k8s-cli:
+        setter:
+          name: gcloud.project.projectNumber
+          value: PROJECT_NUMBER
+          required: true
+    io.k8s.cli.substitutions.mesh-id:
+      x-k8s-cli:
+        substitution:
+          name: mesh-id
+          pattern: proj-${gcloud.project.projectNumber}
+          values:
+          - marker: ${gcloud.project.projectNumber}
+            ref: '#/definitions/io.k8s.cli.setters.gcloud.project.projectNumber'
